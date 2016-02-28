@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="/WEB-INF/tags/layout.xhtml">
+		<ui:define name="content">
+<h:form>
+<h:messages></h:messages>
+			
+
+	<h:panelGrid columns="2">
+	<p:panel header="Kaynak">
+		<p:fieldset legend="Upload İmage" style="margin-bottom:20px">
+			<h:outputLabel value="Url:"></h:outputLabel>
+			<h:inputText value="#{imageMB.url}"> </h:inputText>
+			<p:commandButton value="Yükle" action="#{imageMB.upload}"></p:commandButton>
+			<p:commandButton value="Yükle" action="#{imageMB.updateStatus}"></p:commandButton>
+		</p:fieldset>
+		
+		
+			<p:dataGrid var="image" value="#{imageMB.images}" columns="3" layout="grid"
+        rows="16" paginator="false" id="cars2"
+        rowsPerPageTemplate="6,12,16" style="width:50%">
+ 
+
+ 
+        <p:panel header="#{image.name}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+                <p:graphicImage value="#{image.url}"  width="200" height="200"/> 
+ 
+                <h:outputText value="#{image.status}" />
+ 
+               
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+    </p:panel>
+    <p:panel header="Result">
+    <p:panel header="Query">
+			
+		<h:outputLabel value="url:"></h:outputLabel>
+		<h:inputText value="#{imageMB.urlMatching}"></h:inputText>	<br></br>
+	
+		<h:outputLabel value="Min Score:"></h:outputLabel>
+		<h:inputText value="#{imageMB.minScore}"></h:inputText>	<br></br>
+			
+		<h:commandButton value="Match" action="#{imageMB.match}"></h:commandButton>
+		<h:messages></h:messages>
+	</p:panel>
+	
+	<p:panel header="Source" >
+			<p:graphicImage value="#{imageMB.urlMatching}"  width="200" height="200"/> 
+		
+	</p:panel>
+	
+	<p:panel header="Search Result">
+			<p:dataGrid var="image" value="#{imageMB.searchResultImages}" columns="3" layout="grid"
+        rows="16" paginator="false" id="cars">
+        
+         <p:panel header="#{image.name}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+                <p:graphicImage value="#{image.url}"  width="200" height="200"/> 
+ 
+                <h:outputText value="#{image.transId}" />
+ 
+               
+            </h:panelGrid>
+        </p:panel>
+        
+        </p:dataGrid>
+        
+         
+		
+	</p:panel>
+	</p:panel>
+</h:panelGrid>	
+	
+
+
+</h:form>
+		</ui:define>
+	</ui:composition>
+
+
+
+</h:body>
+</html>

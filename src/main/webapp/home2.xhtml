@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+<style>
+	.ui-widget {
+	font-size: 14px;
+	}
+	</style>
+
+</h:head>	
+	
+<h:body>
+
+
+<div>
+    <div style="width:50%;float:left;display:inline-block;">
+       
+       <h:form>
+
+
+	
+		<p:fieldset legend="Upload İmage" style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+			<h:outputLabel value="Url:"></h:outputLabel>
+			<h:inputText value="#{imageMB.url}" size="50" required="true"> </h:inputText>
+			<h:commandButton value="Yükle" action="#{imageMB.upload}"></h:commandButton>
+			<h:commandButton value="Güncelle" action="#{imageMB.updateStatus}" immediate="true"></h:commandButton>
+			<h:messages></h:messages>
+			</h:panelGrid>
+		</p:fieldset>
+
+
+			<p:dataGrid var="image" value="#{imageMB.images}" columns="3" layout="grid"
+        rows="16" paginator="false" id="cars2"
+        rowsPerPageTemplate="6,12,16" style="width:50%">
+ 
+
+ 
+        <p:panel header="#{image.id}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+<!--                 <p:graphicImage value="#{image.url}"  width="150" height="150"/>  -->
+ 				
+ 				<p:lightBox styleClass="imagebox" id="lighbox1">  
+ 					<h:outputLink value="#{image.url}" title="#{image.name}" >  
+        <p:graphicImage value="#{image.url}"  width="150" height="150"/>  
+    </h:outputLink>	
+ 				</p:lightBox>
+ 				
+ 				
+ 				
+                <h:outputText value="#{image.status}" />
+ 
+               
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+ 
+
+
+
+
+</h:form>
+       
+       
+    </div>
+    <div>
+     <h:form>
+     
+       <p:fieldset legend="Result" style="margin-bottom:20px">
+		<h:panelGrid columns="2">	
+			<h:outputLabel value="url:"></h:outputLabel>
+			<h:inputText value="#{imageMB.urlMatching}" size="50" required="true"></h:inputText>	
+		
+			<h:outputLabel value="Min Score:"></h:outputLabel>
+			<h:inputText value="#{imageMB.minScore}" size="50" required="true"></h:inputText>	
+			</h:panelGrid>	
+		<h:commandButton value="Match" action="#{imageMB.match}"></h:commandButton>
+		<h:messages></h:messages>
+	</p:fieldset>
+	
+	<p:fieldset legend="Aranan Resim" >
+			<p:graphicImage value="#{imageMB.urlMatching}"  width="150" height="150"/> 
+		
+	</p:fieldset>
+	
+	<p:fieldset legend="Sonuc" >
+	<p:dataGrid var="image" value="#{imageMB.searchResultImages}" columns="3" layout="grid"
+        rows="16" paginator="false" id="cars">
+        
+         <p:panel header="#{image.name}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+                <p:lightBox styleClass="imagebox" id="lighbox12">  
+ 					<h:outputLink value="#{image.url}" title="#{image.name}" >  
+        <p:graphicImage value="#{image.url}"  width="150" height="150"/>  
+    </h:outputLink>	
+ 				</p:lightBox> 
+ 
+                <h:outputText value="similarity : #{image.transId}" />
+ 
+               
+            </h:panelGrid>
+        </p:panel>
+        
+        </p:dataGrid>
+	</p:fieldset>
+	</h:form>
+    </div>
+</div>
+
+
+</h:body>
+</html>

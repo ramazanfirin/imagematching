@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+<style>
+	.ui-widget {
+	font-size: 14px;
+	}
+	</style>
+
+</h:head>	
+	
+<h:body>
+
+
+<div>
+    <div style="width:50%;float:left;display:inline-block;">
+       
+       <h:form>
+	
+	<h:messages></h:messages>
+		<h:panelGrid columns="3" cellpadding="5">
+        <p:photoCam widgetVar="pc" listener="#{photoCamView.oncapture}" update="photo" />
+        <p:commandButton type="button" value="Capture" onclick="PF('pc').capture()" update="photo"/>
+        <p:outputPanel id="photo">
+            <p:graphicImage name="demo/images/photocam/#{photoCamView.filename}.jpeg" rendered="#{not empty photoCamView.filename}"/>
+            <p:graphicImage   rendered="#{not empty photoCamView.filename}"/>
+        </p:outputPanel>
+    </h:panelGrid>
+	
+	</h:form>
+    </div>
+</div>
+
+
+</h:body>
+</html>
