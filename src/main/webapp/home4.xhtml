@@ -22,7 +22,7 @@
 <div>
     <div style="width:50%;float:left;display:inline-block;">
        
-       <h:form>
+       <h:form enctype="multipart/form-data">
 
 
 	
@@ -30,13 +30,14 @@
 			<h:panelGrid columns="2">
 			<h:outputLabel value="Url:"></h:outputLabel>
 			<p:fileUpload value="#{ltuImageMB.file}" mode="simple" skinSimple="true"/>
+<!--  <h:inputFile id="file" value="#{ltuImageMB.file2}"/> -->
 			<h:commandButton value="Yükle" action="#{ltuImageMB.upload}"></h:commandButton>
 			<h:messages></h:messages>
 			</h:panelGrid>
 		</p:fieldset>
 
 
-			<p:dataGrid var="image" value="#{imageMB.images}" columns="3" layout="grid"
+			<p:dataGrid var="image" value="#{ltuImageMB.images}" columns="3" layout="grid"
         rows="16" paginator="false" id="cars2"
         rowsPerPageTemplate="6,12,16" style="width:50%">
  
@@ -47,14 +48,14 @@
 <!--                 <p:graphicImage value="#{image.url}"  width="150" height="150"/>  -->
  				
  				<p:lightBox styleClass="imagebox" id="lighbox1">  
- 					<h:outputLink value="#{image.url}" title="#{image.name}" >  
-        <p:graphicImage value="#{image.url}"  width="150" height="150"/>  
-    </h:outputLink>	
+ 					<h:outputLink value="#{image.path}" title="#{image.name}" >  
+        <p:graphicImage name="ltu/#{image.name}" width="150" height="150"/>  
+    </h:outputLink>	 
  				</p:lightBox>
  				
  				
  				
-                <h:outputText value="#{image.status}" />
+               
  
                
             </h:panelGrid>
@@ -71,18 +72,15 @@
        
     </div>
     <div>
-     <h:form>
+     <h:form enctype="multipart/form-data">
      
        <p:fieldset legend="Result" style="margin-bottom:20px">
 		<h:panelGrid columns="2">	
-			<h:outputLabel value="url:"></h:outputLabel>
-			<h:inputText value="#{imageMB.urlMatching}" size="50" required="true"></h:inputText>	
-		
-			<h:outputLabel value="Min Score:"></h:outputLabel>
-			<h:inputText value="#{imageMB.minScore}" size="50" required="true"></h:inputText>	
-			</h:panelGrid>	
-		<h:commandButton value="Match" action="#{imageMB.match}"></h:commandButton>
+			<p:fileUpload value="#{ltuImageMB.searchFile}" mode="simple" skinSimple="true"/>
+
+		<h:commandButton value="Match" action="#{ltuImageMB.match}"></h:commandButton>
 		<h:messages></h:messages>
+		</h:panelGrid>
 	</p:fieldset>
 	
 	<p:fieldset legend="Aranan Resim" >
@@ -91,18 +89,18 @@
 	</p:fieldset>
 	
 	<p:fieldset legend="Sonuc" >
-	<p:dataGrid var="image" value="#{imageMB.searchResultImages}" columns="3" layout="grid"
+	<p:dataGrid var="image" value="#{ltuImageMB.searchResultImages}" columns="3" layout="grid"
         rows="16" paginator="false" id="cars">
         
-         <p:panel header="#{image.name}" style="text-align:center">
+         <p:panel header="#{image.id}" style="text-align:center">
             <h:panelGrid columns="1" style="width:100%">
                 <p:lightBox styleClass="imagebox" id="lighbox12">  
- 					<h:outputLink value="#{image.url}" title="#{image.name}" >  
-        <p:graphicImage value="#{image.url}"  width="150" height="150"/>  
+ 					<h:outputLink value="#{image.id}" title="#{image.id}" >  
+        <p:graphicImage name="ltu/#{image.id}"  width="150" height="150"/>  
     </h:outputLink>	
  				</p:lightBox> 
  
-                <h:outputText value="similarity : #{image.transId}" />
+                <h:outputText value="similarity : #{image.score}" />
  
                
             </h:panelGrid>
