@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+<style>
+	.ui-widget {
+	font-size: 14px;
+	}
+	</style>
+
+
+ <title>Playing YouTube video on HTML5 canvas</title>  
+ <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width" />  
+ <style type="text/css">  
+body {
+        margin: 0px;
+        padding: 0px;
+      } 
+ </style>  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</h:head>	
+	
+<h:body>
+
+<img id="scream" src="#{photoCamView.selectedImage.url}" 
+alt="The Scream" width="220" height="277"></img>
+
+<p>kişi sayısı:#{photoCamView.faceCount}</p>
+<p>contempt:#{photoCamView.contempt}</p>
+<p>surprise:#{photoCamView.surprise}</p>
+<p>happiness:#{photoCamView.happiness}</p>
+<p>neutral:#{photoCamView.neutral}</p>
+<p>sadness:#{photoCamView.sadness}</p>
+<p>disgust:#{photoCamView.disgust}</p>
+<p>anger:#{photoCamView.anger}</p>
+<p>fear:#{photoCamView.fear}</p>
+<canvas id="myCanvas" width="500" height="500" >
+
+
+Your browser does not support the HTML5 canvas tag.</canvas>
+  <script>  
+var c=document.getElementById("myCanvas");
+
+var ctx=c.getContext("2d");
+var img=document.getElementById("scream");
+ctx.drawImage(img,10,10);  
+
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+
+      context.beginPath();
+       context.rect(#{photoCamView.rectangle});
+      //.fillStyle = 'yellow';
+      //context.fill();
+      context.lineWidth = 5;
+      //context.strokeStyle = 'black';
+      context.stroke();
+	  
+	  context.addHitRegion({id: "test"});
+	  
+	 //aaa.addEventListener("mouseover", doMouseOver, false);
+	 //aaa.addEventListener("mouseout", doMouseOut, false);
+
+function doMouseOver(e){
+    ctx.fillStyle = 'red';
+    ctx.fill();
+}
+
+function doMouseOut(e){
+    ctx.fillStyle = 'yellow';
+    ctx.fill();
+}	 
+  </script>  
+
+
+</h:body>
+</html>

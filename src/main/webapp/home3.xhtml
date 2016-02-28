@@ -34,7 +34,34 @@
         </p:outputPanel>
     </h:panelGrid>
 	
+	
+	<p:dataTable var="car" value="#{photoCamView.list}" selection="#{photoCamView.selectedImage}"> 
+	
+	<p:column style="width:32px;text-align: center">
+             <p:commandButton  oncomplete="window.open('home5.xhtml', '_blank')" icon="ui-icon-search" title="View">
+                <f:setPropertyActionListener value="#{car}" target="#{photoCamView.selectedImage}" />
+            </p:commandButton>
+        </p:column>
+	
+	
+		<p:column headerText="Resim">
+        
+        	<h:graphicImage value="#{car.url}" width="100" height="100"></h:graphicImage>
+    	
+    	</p:column>
+ 
+    <p:column headerText="Tarih">
+        <h:outputText value="#{car.insertDate}" />
+    </p:column>
+ 
+    <p:column headerText="id">
+        <h:outputText value="#{car.id}" />
+    </p:column>
+	
+	</p:dataTable>
 	</h:form>
+	
+	
     </div>
 </div>
 
