@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"/>
+    <meta name="description" content="KG Teknoloji Search Engine"/>
+    <meta name="author" content="KG Teknoloji"/>
+    <title>KG Teknoloji</title>
+    <link rel="apple-touch-icon" href="Assets/images/apple-touch-icon.png"/>
+    <link rel="shortcut icon" href="Assets/images/favicon.png"/>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="Assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="Assets/css/bootstrap-extend.min.css"/>
+    <link rel="stylesheet" href="Assets/css/site.min.css"/>
+    <link rel="stylesheet" href="Assets/css/projects.css"/>
+    <!-- Plugins -->
+    <link rel="stylesheet" href="Assets/vendor/animsition/animsition.css"/>
+    <link rel="stylesheet" href="Assets/vendor/jquery-selective/jquery-selective.css"/>
+    <link rel="stylesheet" href="Assets/vendor/magnific-popup/magnific-popup.css"/>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="assets/fonts/web-icons/web-icons.min.css"/>
+    <link rel="stylesheet"  href="Assets/fonts/roboto/roboto.css" />
+    <!--[if lt IE 9]>
+      <script src="Assets/html5shiv/html5shiv.min.js"></script>
+      <![endif]-->
+    <!--[if lt IE 10]>
+      <script src="Assets/media-match/media.match.min.js"></script>
+      <script src="Assets/respond/respond.min.js"></script>
+      <![endif]-->
+    <!-- Scripts -->
+    <script src="Assets/vendor/modernizr/modernizr.js"></script>
+    <script src="Assets/vendor/breakpoints/breakpoints.js"></script>
+    <script>
+        Breakpoints();
+    </script>
+</h:head>
+
+<h:body class="app-projects">
+    <!--[if lt IE 8]>
+          <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+
+    <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega navbar-inverse" role="navigation">
+        <div class="navbar-header">
+         
+            <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
+                <img class="navbar-brand-logo" src="Assets/images/logo-kg.png"/>
+            </div>
+        </div>
+       
+    </nav>
+
+    <div class="page-content container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+               
+                <div class="page-header">
+                    <h:form>
+                    <h3 class="page-title">Upload Image</h3>
+                    <div class="col-md-12">
+                        <div class="example">
+                            <p:inputText  styleClass="form-control" id="inputBasicFirstName" name="inputFirstName" placeholder="URL" />
+                        </div>
+
+						<div class="example">
+                            <p:inputText  styleClass="form-control" id="inputBasicFirstName2" name="inputFirstName" placeholder="URL" />
+                        </div>
+                        
+
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="example">
+                                <input type="file" id="input-file-events" class="dropify-event" data-default-file="Assets/photos/placeholder.png"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div style="float: right;">
+
+								  <h:commandLink action="#{imageMB.upload}" immediate="true" styleClass="btn btn-animate btn-animate-side btn-primary btn-sm">
+                              	    <span>YÜKLE</span>
+                              	</h:commandLink>
+                  
+                                
+                                <h:commandLink action="#{imageMB.updateStatus}" immediate="true" styleClass="btn btn-animate btn-animate-side btn-primary btn-sm">
+                              	 <span>GÜNCELLE</span>
+                              	</h:commandLink>
+                              	
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <h:messages></h:messages>
+                    </h:form>
+                </div>
+                <div class="col-md-12">
+                    <div class="page-content">
+
+                        <div class="projects-wrap">
+                            <ul class="blocks blocks-100 blocks-xlg-3 blocks-md-3 blocks-sm-3 blocks-xs-2"
+                                data-plugin="animateList" data-child=">li">
+
+								<ui:repeat var="image" value="#{imageMB.images}">
+									<li>
+                                    <div class="panel">
+                                        <div class="widget widget-shadow">
+                                            <figure class="widget-header overlay-hover overlay">
+                                                 <p:graphicImage styleClass="overlay-figure overlay-scale" value="#{image.url}"  width="150" height="150"/> 
+                                                <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                                    <a class="icon wb-search" href="#{image.url}"></a>
+                                                </figcaption>
+                                            </figure>
+
+                                        </div>
+                                        <div class="time pull-right"></div>
+                                        <div><h:outputText value="#{image.status}" /></div>
+                                    </div>
+                                </li>
+								</ui:repeat>
+
+                                
+                               
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                
+                <div class="page-header">
+                   <h:form>
+                    <h3 class="page-title">Search Result</h3>
+                    <div class="col-md-12">
+                        <div class="example">
+                        	<p:inputText value="#{imageMB.urlMatching}" styleClass="form-control" size="50" placeholder="Search URL" required="true"></p:inputText>
+                        </div>
+
+                        <div class="example">
+                            <p:inputText value="#{imageMB.minScore}" styleClass="form-control" size="50" placeholder="Score" required="true"></p:inputText>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div style="float: right;">
+                              	<h:commandLink action="#{imageMB.match}" styleClass="btn btn-animate btn-animate-side btn-primary btn-sm">
+                              	 <span>ARA</span>
+                              	</h:commandLink>
+
+								<h:commandLink onclick="window.open('#{imageMB.urlMatching}')" styleClass="btn btn-animate btn-animate-side btn-primary btn-sm">
+                              	 <span>Resmi Göster</span>
+                              	</h:commandLink>	
+                       
+                            </div>
+                        </div>
+                    </div>
+                     <h:messages></h:messages>
+                   
+                    </h:form>
+                      <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+    <h:outputText value="Resistance to PrimeFaces is futile!" />
+</p:dialog>
+                </div>
+                <div class="col-md-12">
+                    <div class="page-content">
+
+                        <div class="projects-wrap">
+                            <ul class="blocks blocks-100 blocks-xlg-3 blocks-md-3 blocks-sm-3 blocks-xs-2"
+                                data-plugin="animateList" data-child=">li">
+
+							<ui:repeat var="image" value="#{imageMB.searchResultImages}">
+								<li>
+                                    <div class="panel">
+                                        <div class="widget widget-shadow">
+                                            <figure class="widget-header overlay-hover overlay">
+                                                <p:graphicImage styleClass="overlay-figure overlay-scale" value="#{image.url}"  width="150" height="150"/>  
+                                                
+                                                <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
+                                                    <a class="icon wb-search" href="#{image.url}"></a>
+                                                </figcaption>
+                                            </figure>
+
+                                        </div>
+                                        <div class="time pull-right">5</div>
+                                        <div><h:outputText value="similarity : #{image.transId}" /></div>
+                                    </div>
+                                </li>
+							</ui:repeat>
+
+                                
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Core  -->
+    <script src="Assets/vendor/jquery/jquery.js"></script>
+    <script src="Assets/vendor/bootstrap/bootstrap.js"></script>
+    <script src="Assets/vendor/animsition/jquery.animsition.js"></script>
+    <!-- Plugins -->
+    <script src="Assets/vendor/jquery-selective/jquery-selective.min.js"></script>
+    <script src="Assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Scripts -->
+    <script src="Assets/js/core.js"></script>
+    <script src="Assets/js/site.js"></script>
+    <script src="Assets/js/components/animsition.js"></script>
+    <script src="Assets/js/components/switchery.js"></script>
+    <script src="Assets/js/app.js"></script>
+    <script src="Assets/js/components/animate-list.js"></script>
+    <script src="Assets/examples/js/apps/projects.js"></script>
+    <script src="Assets/examples/js/pages/gallery.js"></script>
+
+</h:body>
+</html>
