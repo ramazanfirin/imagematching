@@ -64,6 +64,7 @@
                
                 <div class="page-header">
                     <h:form>
+                     <h:messages></h:messages>
                     <h3 class="page-title">Upload Image</h3>
                     <div class="col-md-12">
                         <div class="example">
@@ -98,7 +99,7 @@
                             
                         </div>
                     </div>
-                    <h:messages></h:messages>
+                   
                     </h:form>
                 </div>
                 <div class="col-md-12">
@@ -139,6 +140,7 @@
                 
                 <div class="page-header">
                    <h:form>
+                   <h:messages></h:messages>
                     <h3 class="page-title">Search Result</h3>
                     <div class="col-md-12">
                         <div class="example">
@@ -160,18 +162,23 @@
                               	 <span>ARA</span>
                               	</h:commandLink>
 
-								<h:commandLink onclick="window.open('#{imageMB.urlMatching}')" styleClass="btn btn-animate btn-animate-side btn-primary btn-sm">
-                              	 <span>Resmi Göster</span>
-                              	</h:commandLink>	
+<!-- 								<h:commandLink onclick="PF('dlg1').show();" immediate="true" styleClass="btn btn-animate btn-animate-side btn-primary btn-sm"> -->
+<!--                               	 <span>Resmi Göster</span> -->
+<!--                               	</h:commandLink>	 -->
+                              	
+                              	<button type="button" onclick="PF('dlg1').show();" class="btn btn-animate btn-animate-side btn-primary btn-sm">
+                                    <span>Resmi Göster</span>
+                                </button>
+                              	
                        
                             </div>
                         </div>
                     </div>
-                     <h:messages></h:messages>
+                     
                    
                     </h:form>
                       <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-    <h:outputText value="Resistance to PrimeFaces is futile!" />
+   <h:graphicImage url="#{imageMB.urlMatching}"></h:graphicImage>
 </p:dialog>
                 </div>
                 <div class="col-md-12">
@@ -213,7 +220,7 @@
 
 
     <!-- Core  -->
-    <script src="Assets/vendor/jquery/jquery.js"></script>
+<!--     <script src="Assets/vendor/jquery/jquery.js"></script> -->
     <script src="Assets/vendor/bootstrap/bootstrap.js"></script>
     <script src="Assets/vendor/animsition/jquery.animsition.js"></script>
     <!-- Plugins -->
