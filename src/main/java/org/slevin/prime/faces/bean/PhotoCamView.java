@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -56,12 +57,27 @@ public class PhotoCamView {
     public void init() throws Exception{
     	list = emotionImageDao.findAll();
     }
+    
+    public void refresh() throws Exception{
+    	list.clear();
+    	list.addAll(emotionImageDao.findAll());
+    }
      
-    public String getRectangle() throws ParseException{
+    public void deleteAll() throws Exception{
+    	for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+			EmotionImage emotionImage = (EmotionImage) iterator.next();
+			emotionImageDao.remove(emotionImage.getId());
+		}
+    	list.clear();
+    	
+    }
+    
+    public String getRectangle() throws Exception{
     	if(selectedImage==null)
     		return "";
     	
-    	String aa= selectedImage.getResult();
+    	EmotionImage tempImage = emotionImageDao.findById(selectedImage.getId());
+    	String aa= tempImage.getResult();
     	JSONParser parser = new JSONParser();
 		Object obj = parser.parse(aa);
 
@@ -75,7 +91,7 @@ public class PhotoCamView {
 		String left=jsonObjectRect.get("left").toString();
 		String width=jsonObjectRect.get("width").toString();
 		String heigth=jsonObjectRect.get("height").toString();
-		String result=heigth+","+left+","+top+","+width;
+		String result=left+","+top+","+width+","+heigth;
 		
 		JSONObject jsonObjectScores = (JSONObject)jsonObject.get("scores");
 		contempt = jsonObjectScores.get("contempt").toString();

@@ -27,15 +27,16 @@
 	<h:messages></h:messages>
 		<h:panelGrid columns="3" cellpadding="5">
         <p:photoCam widgetVar="pc" listener="#{photoCamView.oncapture}" update="photo" />
-        <p:commandButton type="button" value="Capture" onclick="PF('pc').capture()" update="photo"/>
+        <p:commandButton value="Capture" onclick="PF('pc').capture()" update="table,photo" />
         <p:outputPanel id="photo">
             <p:graphicImage name="demo/images/photocam/#{photoCamView.filename}.jpeg" rendered="#{not empty photoCamView.filename}"/>
             <p:graphicImage   rendered="#{not empty photoCamView.filename}"/>
         </p:outputPanel>
     </h:panelGrid>
 	
-	
-	<p:dataTable var="car" value="#{photoCamView.list}" selection="#{photoCamView.selectedImage}"> 
+	<p:commandButton value="Güncelle" action="#{photoCamView.refresh}" update="table"/>
+	<p:commandButton value="Sil" action="#{photoCamView.deleteAll}" update="table"/>
+	<p:dataTable id="table" var="car" value="#{photoCamView.list}" selection="#{photoCamView.selectedImage}"> 
 	
 	<p:column style="width:32px;text-align: center">
              <p:commandButton  oncomplete="window.open('home5.xhtml', '_blank')" icon="ui-icon-search" title="View">

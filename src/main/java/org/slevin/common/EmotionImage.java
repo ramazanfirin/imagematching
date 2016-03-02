@@ -1,5 +1,6 @@
 package org.slevin.common;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -17,7 +18,7 @@ import org.slevin.common.Item;
 
 @Entity
 @Table(name="T_EMOTION_IMAGE")
-public class EmotionImage {
+public class EmotionImage implements Serializable{
 	
 	
 	@Id
