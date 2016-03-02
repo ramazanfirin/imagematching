@@ -80,6 +80,7 @@ public class LtuImageMB {
 			System.out.println(searchFile.getFileName());
 			if(searchFile.getFileName().equals(lastSearchFileName)){
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tekrar deneyin", "Tekrar Deneyin"));
+				searchResultImages.clear();
 				lastSearchFileName="";
 				return;
 			}

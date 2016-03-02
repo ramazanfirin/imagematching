@@ -56,6 +56,7 @@ public class ImageMB {
 	@PostConstruct
 	public void init() throws Exception{
 		images = imageService.findAll();
+		System.out.println(images.size() + "image bulundu");
 	}
 	
 	public void upload(){
