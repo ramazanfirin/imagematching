@@ -47,7 +47,7 @@
     <!--[if lt IE 8]>
           <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
-
+<h:form enctype="multipart/form-data">
     <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega navbar-inverse" role="navigation">
         <div class="navbar-header">
          
@@ -63,11 +63,11 @@
             <div class="col-md-6">
                
                 <div class="page-header">
-                    <h:form enctype="multipart/form-data">
-                     <h:messages></h:messages>
+                    
+                     <h:messages id="messages"></h:messages>
                     <h3 class="page-title">Upload Image</h3>
                     <div class="col-md-12">
-                        <p:fileUpload value="#{ltuImageMB.file}" mode="simple" skinSimple="true"/>
+                        <p:fileUpload fileUploadListener="#{ltuImageMB.handleFileUpload}"  id="uploadFile" update="messages"/>
 
 						
 
@@ -75,13 +75,13 @@
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="example">
-                               <p:fileUpload value="#{ltuImageMB.file}" mode="simple" skinSimple="true"/>
+<!--                                <p:fileUpload  mode="simple" skinSimple="true"/> -->
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div style="float: right;">
 
-								  <h:commandLink action="#{ltuImageMB.upload}" immediate="true" styleClass="btn btn-animate btn-animate-side btn-primary btn-sm">
+								  <h:commandLink actionListener="#{ltuImageMB.upload}" immediate="true" styleClass="btn btn-animate btn-animate-side btn-primary btn-sm">
                               	    <span>YÜKLE</span>
                               	</h:commandLink>
                   
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                    
-                    </h:form>
+                
                 </div>
                 <div class="col-md-12">
                     <div class="page-content">
@@ -134,7 +134,7 @@
             <div class="col-md-6">
                 
                 <div class="page-header">
-                   <h:form enctype="multipart/form-data">
+                  
                    <h:messages></h:messages>
                     <h3 class="page-title">Search Result</h3>
                     <div class="col-md-12">
@@ -169,11 +169,8 @@
                     </div>
                      
                    
-                    </h:form>
-                      <p:dialog id="dialogImage" header="Image" widgetVar="dlg1" minHeight="40">
-  
-   <p:graphicImage value="#{ltuImageMB.myImage}" cache="false" height="300" width="400"/>
-</p:dialog>
+                  
+                    
                 </div>
                 <div class="col-md-12">
                     <div class="page-content">
@@ -212,7 +209,11 @@
     </div>
 
 
-
+  </h:form>
+    <p:dialog id="dialogImage" header="Image" widgetVar="dlg1" minHeight="40">
+  
+   <p:graphicImage value="#{ltuImageMB.myImage}" cache="false" height="300" width="400"/>
+</p:dialog>
     <!-- Core  -->
 <!--     <script src="Assets/vendor/jquery/jquery.js"></script> -->
     <script src="Assets/vendor/bootstrap/bootstrap.js"></script>

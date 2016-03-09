@@ -1,6 +1,9 @@
 package org.slevin.prime.faces.bean;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +11,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
@@ -37,7 +43,7 @@ public class LtuImageMB {
 	List<org.slevin.common.LtuImage> images= new ArrayList<org.slevin.common.LtuImage>();
 	List<LtuDto> searchResultImages= new ArrayList<LtuDto>();
 	
-	private UploadedFile file;
+	private UploadedFile uploadfile;
 	private UploadedFile searchFile;
 	 private Part file2;
 	private String lastUploadedFileName;
@@ -55,25 +61,41 @@ public class LtuImageMB {
 		
 	}
 	
-	public void upload(){
+	
+	
+	public void handleFileUpload(FileUploadEvent event) {
 		try {
 //			String url = "http://www.example.com/some/path/to/a/file.xml";
-
-			System.out.println(file.getFileName());
-			if(file.getFileName().equals(lastUploadedFileName)){
+			System.out.println("sdsfsd");
+			uploadfile = event.getFile();
+			
+			System.out.println(uploadfile.getFileName());
+			if(uploadfile.getFileName().equals(lastUploadedFileName)){
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tekrar deneyin", "Tekrar Deneyin"));
 				lastUploadedFileName="";
 				return;
 			}
-				
 			
-	        LtuUtil.insertFile(file.getContents(),file.getFileName()); 
+			ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+			String newFileName = servletContext.getRealPath("") + File.separator + "resources" + 
+                    File.separator + "ltu"  + File.separator + uploadfile.getFileName() ;
+			
+			InputStream in = new ByteArrayInputStream(uploadfile.getContents());
+			BufferedImage bImageFromConvert = ImageIO.read(in);
+			ImageIO.write(bImageFromConvert, "jpg",new File(newFileName));
+			
+			
+//			if(1==1)
+//				return;
+			
+	        LtuUtil.insertFile(uploadfile.getContents(),uploadfile.getFileName()); 
 	        LtuImage image = new LtuImage();
-	        image.setName(file.getFileName());
+	        image.setName(uploadfile.getFileName());
 	        imageService.persist(image);
-	        lastUploadedFileName = file.getFileName();
+	        lastUploadedFileName = uploadfile.getFileName();
 	       
-	        
+	        images.clear();
+			images.addAll(imageService.findAll());
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("tamamlandi", "tamamlandi"));
 			
 		} catch (Exception e) {
@@ -144,11 +166,11 @@ public class LtuImageMB {
 
 
 	public UploadedFile getFile() {
-		return file;
+		return uploadfile;
 	}
 
 	public void setFile(UploadedFile file) {
-		this.file = file;
+		this.uploadfile = file;
 	}
 
 	public String getLastUploadedFileName() {
@@ -190,6 +212,14 @@ public class LtuImageMB {
 
 	public void setMyImage(StreamedContent myImage) {
 		this.myImage = myImage;
+	}
+
+	public UploadedFile getUploadfile() {
+		return uploadfile;
+	}
+
+	public void setUploadfile(UploadedFile uploadfile) {
+		this.uploadfile = uploadfile;
 	}
 	
 

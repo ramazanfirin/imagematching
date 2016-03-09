@@ -35,9 +35,9 @@ public class ImageMB {
 	
 	//https://image5.sahibinden.com/photos/64/17/63/203641763m86.jpg
 
-	ViSearch client = new ViSearch("d09d93ea1cf82810e7cd2c4e366eb828", "75ac5f6c38c8a9d52edb0d558395fc58");
+	//ViSearch client = new ViSearch("d09d93ea1cf82810e7cd2c4e366eb828", "75ac5f6c38c8a9d52edb0d558395fc58");
 	
-	//ViSearch client = new ViSearch("0b22888aa60aa36cf03d9c45fa734d21", "3649a4d895068fcd8994e4a6cd174bdc");
+	ViSearch client = new ViSearch("0b22888aa60aa36cf03d9c45fa734d21", "3649a4d895068fcd8994e4a6cd174bdc");
 	
 	//0b22888aa60aa36cf03d9c45fa734d21 3649a4d895068fcd8994e4a6cd174bdc
 	//Map<String,String> imageList = new HashMap 
