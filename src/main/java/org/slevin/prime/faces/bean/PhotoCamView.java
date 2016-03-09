@@ -29,6 +29,8 @@ import org.slevin.common.EmotionImage;
 import org.slevin.dao.EmotionImageDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.github.sarxos.webcam.Webcam;
  
 @Component(value="photoCamView")
 @RequestScoped
@@ -56,6 +58,14 @@ public class PhotoCamView {
     @PostConstruct
     public void init() throws Exception{
     	list = emotionImageDao.findAll();
+    }
+    
+    public void capture() throws IOException{
+    	Webcam webcam = Webcam.getDefault();
+    	webcam.open();
+    	File file  = new File("c:\\capture\\hello-world.png");
+    	ImageIO.write(webcam.getImage(), "PNG", file);
+    	System.out.println("bitti");
     }
     
     public void refresh() throws Exception{

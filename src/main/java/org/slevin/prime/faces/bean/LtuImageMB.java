@@ -1,7 +1,7 @@
 package org.slevin.prime.faces.bean;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +10,8 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.slevin.common.LtuImage;
 import org.slevin.dao.LtuImageDao;
@@ -41,10 +43,16 @@ public class LtuImageMB {
 	private String lastUploadedFileName;
 	private String lastSearchFileName;
 	
+	private StreamedContent myImage;
+
 	
 	@PostConstruct
 	public void init() throws Exception{
 		images = imageService.findAll();
+	}
+	
+	public void temp(){
+		
 	}
 	
 	public void upload(){
@@ -64,6 +72,8 @@ public class LtuImageMB {
 	        image.setName(file.getFileName());
 	        imageService.persist(image);
 	        lastUploadedFileName = file.getFileName();
+	       
+	        
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("tamamlandi", "tamamlandi"));
 			
 		} catch (Exception e) {
@@ -93,6 +103,11 @@ public class LtuImageMB {
 //				
 //			}
 
+			 ByteArrayInputStream bis = new ByteArrayInputStream(searchFile.getContents());
+			 StreamedContent   myImageasd = new DefaultStreamedContent(bis, "image/png");
+			 setMyImage(myImageasd);
+		        System.out.println(searchFile.getContents().length +" byte arandi");
+		       
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("tamamlandi", "tamamlandi"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -166,6 +181,15 @@ public class LtuImageMB {
 
 	public void setSearchResultImages(List<LtuDto> searchResultImages) {
 		this.searchResultImages = searchResultImages;
+	}
+
+	public StreamedContent getMyImage() {
+		//System.out.println(myImage.getStream());
+		return myImage;
+	}
+
+	public void setMyImage(StreamedContent myImage) {
+		this.myImage = myImage;
 	}
 	
 

@@ -83,4 +83,15 @@
 
 
 
+<servlet>
+        <description></description>
+        <display-name>DisplayImage</display-name>
+        <servlet-name>DisplayImage</servlet-name>
+        <servlet-class>org.slevin.servlet.DisplayImage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayImage</servlet-name>
+        <url-pattern>/DisplayImage</url-pattern>
+    </servlet-mapping>
+
 </web-app>

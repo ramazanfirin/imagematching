@@ -170,8 +170,9 @@
                      
                    
                     </h:form>
-                      <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-   <h:graphicImage url="#{imageMB.urlMatching}"></h:graphicImage>
+                      <p:dialog id="dialogImage" header="Image" widgetVar="dlg1" minHeight="40">
+  
+   <p:graphicImage value="#{ltuImageMB.myImage}" cache="false" height="300" width="400"/>
 </p:dialog>
                 </div>
                 <div class="col-md-12">

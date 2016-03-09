@@ -28,6 +28,8 @@
 		<h:panelGrid columns="3" cellpadding="5">
         <p:photoCam widgetVar="pc" listener="#{photoCamView.oncapture}" update="photo" />
         <p:commandButton value="Capture" onclick="PF('pc').capture()" update="table,photo" />
+        
+        <p:commandButton value="Capture2" action="#{photoCamView.capture}" />
         <p:outputPanel id="photo">
             <p:graphicImage name="demo/images/photocam/#{photoCamView.filename}.jpeg" rendered="#{not empty photoCamView.filename}"/>
             <p:graphicImage   rendered="#{not empty photoCamView.filename}"/>
