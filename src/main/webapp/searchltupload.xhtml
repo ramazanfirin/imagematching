@@ -67,7 +67,7 @@
                      <h:messages id="messages"></h:messages>
                     <h3 class="page-title">Upload Image</h3>
                     <div class="col-md-12">
-                        <p:fileUpload fileUploadListener="#{ltuImageMB.handleFileUpload}" mode="simple" id="uploadFile" update="messages"/>
+                        <p:fileUpload fileUploadListener="#{ltuImageMB.handleFileUpload}"  id="uploadFile" update="messages"/>
 
 						
 
@@ -111,7 +111,7 @@
                                             <figure class="widget-header overlay-hover overlay">
                                                 <p:graphicImage styleClass="overlay-figure overlay-scale" name="ltu/#{image.name}"  width="150" height="150"/> 
                                                 <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                                   <a class="icon wb-search" href="/primefaces-spring-jpa-tutorial/javax.faces.resource/ltu/#{image.name}.xhtml"></a>
+                                                    <a class="icon wb-search" href="ltu/#{image.name}"></a>
                                                 </figcaption>
                                             </figure>
 
@@ -187,7 +187,7 @@
                                                 <p:graphicImage styleClass="overlay-figure overlay-scale" name="ltu/#{image.id}"  width="150" height="150"/>  
                                            
                                                 <figcaption class="overlay-panel overlay-background overlay-fade overlay-icon">
-                                                    <a class="icon wb-search" href="/primefaces-spring-jpa-tutorial/javax.faces.resource/ltu/#{image.id}.xhtml"></a>
+                                                    <a class="icon wb-search" href="ltu/#{image.id}"></a>
                                                 </figcaption>
                                             </figure>
 
