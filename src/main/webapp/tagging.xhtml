@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"/>
+    <meta name="description" content="KG Teknoloji Search Engine"/>
+    <meta name="author" content="KG Teknoloji"/>
+    <title>KG Teknoloji</title>
+    <link rel="apple-touch-icon" href="Assets/images/apple-touch-icon.png"/>
+    <link rel="shortcut icon" href="Assets/images/favicon.png"/>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="Assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="Assets/css/bootstrap-extend.min.css"/>
+    <link rel="stylesheet" href="Assets/css/site.min.css"/>
+    <link rel="stylesheet" href="Assets/css/projects.css"/>
+    <!-- Plugins -->
+    <link rel="stylesheet" href="Assets/vendor/animsition/animsition.css"/>
+    <link rel="stylesheet" href="Assets/vendor/jquery-selective/jquery-selective.css"/>
+    <link rel="stylesheet" href="Assets/vendor/magnific-popup/magnific-popup.css"/>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="assets/fonts/web-icons/web-icons.min.css"/>
+    <link rel="stylesheet"  href="Assets/fonts/roboto/roboto.css" />
+    <!--[if lt IE 9]>
+      <script src="Assets/html5shiv/html5shiv.min.js"></script>
+      <![endif]-->
+    <!--[if lt IE 10]>
+      <script src="Assets/media-match/media.match.min.js"></script>
+      <script src="Assets/respond/respond.min.js"></script>
+      <![endif]-->
+    <!-- Scripts -->
+    <script src="Assets/vendor/modernizr/modernizr.js"></script>
+    <script src="Assets/vendor/breakpoints/breakpoints.js"></script>
+    <script>
+        Breakpoints();
+    </script>
+</h:head>
+
+<h:body class="app-projects">
+    <!--[if lt IE 8]>
+          <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+<h:form enctype="multipart/form-data" prependId="false">
+    <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega navbar-inverse" role="navigation">
+        <div class="navbar-header">
+         
+            <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
+                <img class="navbar-brand-logo" src="Assets/images/logo-kg.png"/>
+            </div>
+        </div>
+       
+    </nav>
+
+    <div class="page-content container-fluid">
+        <div class="row">
+            
+
+            <div class="col-md-4">
+                
+                <div class="page-header">
+                  
+                   <h:messages></h:messages>
+                  
+                    <div class="col-md-12">
+                        <div class="example">
+                        
+                        	<p:graphicImage value="#{taggingMB.myImage}" cache="false" height="300" width="400"/>
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="col-md-12">
+                    	<div class="col-md-6">
+                    	<p:fileUpload value="#{taggingMB.searchFile}" mode="simple" skinSimple="true"/>
+                    	</div>
+                    
+                        <div class="col-md-6">
+                            	
+                            <h:commandLink action="#{taggingMB.upload}" styleClass="btn btn-animate btn-animate-side btn-primary btn-sm">
+                              	 <span>ARA</span>
+                              	</h:commandLink>
+                        </div>
+                        
+                    </div>
+                     
+                    
+                    
+                </div>
+                
+            </div>
+            <div class="col-md-8">
+             <div class="page-header">
+                    	<p:dashboard id="board" model="#{taggingMB.model}">
+            
+            <p:panel id="Categories" header="Categories">
+                <p:panelGrid columns="3">
+                	<h:outputText value="Score" />
+                	<h:outputText value=":" />
+                	<h:outputText value="#{taggingMB.apiResult.categories.score}" />
+                	
+                	<h:outputText value="Name" />
+                	<h:outputText value=":" />
+                	<h:outputText value="#{taggingMB.apiResult.categories.name}" />
+                	
+                	<h:outputText value="Celebrities" />
+                	<h:outputText value=":" />
+                	<h:outputText value="" />
+                </p:panelGrid>
+            </p:panel>
+ 
+            <p:panel id="Adult" header="Adult">
+                <p:panelGrid columns="3" >
+                	<h:outputText value="isAdultContent" />
+                	<h:outputText value=":" />
+                	<h:outputText value="#{taggingMB.apiResult.adult.isAdultContent}" />
+                	
+                	<h:outputText value="isRacyContent" />
+                	<h:outputText value=":" />
+                	<h:outputText value="#{taggingMB.apiResult.adult.isRacyContent}" />
+                	
+                	<h:outputText value="racyScore" />
+                	<h:outputText value=":" />
+                	<h:outputText value="#{taggingMB.apiResult.adult.racyScore}" />
+                	
+                	<h:outputText value="adultScore" />
+                	<h:outputText value=":" />
+                	<h:outputText value="#{taggingMB.apiResult.adult.adultScore}" />
+                </p:panelGrid>
+            </p:panel>
+ 
+            <p:panel id="Tag" header="Tag">
+                <p:dataList value="#{taggingMB.apiResult.tag.tagList}" var="car" type="ordered">
+        
+        #{car.name} - #{car.confidence}
+    </p:dataList>
+ 
+            </p:panel>
+ 
+            <p:panel id="Description" header="Description">
+                 <p:panelGrid columns="3" >
+                	<h:outputText value="text" />
+                	<h:outputText value=":" />
+                	<h:outputText value="#{taggingMB.apiResult.description.caption.text}" />
+                	
+                	<h:outputText value="Confidence" />
+                	<h:outputText value=":" />
+                	<h:outputText value="#{taggingMB.apiResult.description.caption.confidence}" />
+                </p:panelGrid>	
+                
+                <p:dataList value="#{taggingMB.apiResult.description.tags}" var="car" type="ordered">
+        
+        #{car}
+    </p:dataList>
+            </p:panel>
+ 
+ <p:panel id="Faces" header="Faces">
+ <h:outputLabel value="Faces can be detect with coordinate,age,gender"></h:outputLabel>
+ </p:panel>
+ 
+ <p:panel id="ImageType" header="ImageType">
+ <h:outputLabel value="detect if clipart or line drawing"></h:outputLabel>
+ </p:panel>
+ 
+ <p:panel id="Color" header="Color">
+ <h:outputLabel value="detect accent color, dominant color, black and white"></h:outputLabel>
+ </p:panel>
+ 
+   
+        </p:dashboard>
+ 
+           </div>         </div>
+                  
+        </div>
+    </div>
+
+
+  </h:form>
+
+    <!-- Core  -->
+<!--     <script src="Assets/vendor/jquery/jquery.js"></script> -->
+    <script src="Assets/vendor/bootstrap/bootstrap.js"></script>
+    <script src="Assets/vendor/animsition/jquery.animsition.js"></script>
+    <!-- Plugins -->
+    <script src="Assets/vendor/jquery-selective/jquery-selective.min.js"></script>
+    <script src="Assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Scripts -->
+    <script src="Assets/js/core.js"></script>
+    <script src="Assets/js/site.js"></script>
+    <script src="Assets/js/components/animsition.js"></script>
+    <script src="Assets/js/components/switchery.js"></script>
+    <script src="Assets/js/app.js"></script>
+    <script src="Assets/js/components/animate-list.js"></script>
+    <script src="Assets/examples/js/apps/projects.js"></script>
+    <script src="Assets/examples/js/pages/gallery.js"></script>
+
+</h:body>
+</html>

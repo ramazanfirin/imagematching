@@ -79,5 +79,9 @@ public class EmotionUtil {
 	        
 	        return "";
 	    }
+	 
+	 public static void staticParseVisualApi(String aaa){
+		 
+	 }
 	
 }
