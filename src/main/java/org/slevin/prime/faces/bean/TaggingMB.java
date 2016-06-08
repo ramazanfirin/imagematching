@@ -91,12 +91,22 @@ public class TaggingMB {
 	
 	public void upload() throws ParseException{
 		System.out.println("geldi");
+		
+		
+		//System.out.println(searchFile.getFileName());
+//		if(searchFile.getFileName().equals(lastUploadedFileName)){
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tekrar deneyin", "Tekrar Deneyin"));
+//			lastUploadedFileName="";
+//			return;
+//		}
+		
 		String result =TaggingUtil.sendFile(searchFile.getContents());
 		apiResult = TaggingUtil.parseResponse(result);
 		
 		ByteArrayInputStream bis = new ByteArrayInputStream(searchFile.getContents());
 		 StreamedContent   myImageasd = new DefaultStreamedContent(bis, "image/png");
 		 setMyImage(myImageasd);
+		 lastUploadedFileName = searchFile.getFileName();
 	}
 	
 	

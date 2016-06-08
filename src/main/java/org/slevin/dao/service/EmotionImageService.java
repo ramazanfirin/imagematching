@@ -24,7 +24,7 @@ public class EmotionImageService extends EntityService<EmotionImage> implements 
 	String key="d80b29ccc96546b2a333edd5641188b6";
 	
 	
-	@Override
+
 	public String sendFile(byte[] data) {
 		HttpClient httpclient = HttpClients.createDefault();
 
