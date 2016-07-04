@@ -71,7 +71,7 @@
                     <div class="col-md-12">
                         <div class="example">
                         
-                        	<p:tabView binding="#{faceMB.tabView}">
+                        	<p:tabView >
         <p:tab title="Enroll Person">
             <h:form enctype="multipart/form-data" prependId="false">
             <h:panelGrid columns="3" cellpadding="10">
@@ -105,20 +105,7 @@
                               	 <span>Search Person</span>
                               	</h:commandLink>
                               	
-             <p:dataTable value="#{faceMB.resultList}" var="person">
-           
-           <f:facet name="header">
-       Eşleşme Listesi
-    </f:facet>
-             	<p:column headerText="Score">
-        <h:outputText value="#{person.confidence}" />
-    </p:column>
-    <p:column headerText="Name">
-        <h:outputText value="#{person.name}" />
-    </p:column>
-    
-            
-            </p:dataTable>                        	
+                                 	
                               	
                               	
             </h:form>
@@ -141,6 +128,21 @@
                         	<br></br>
                    
                    <h:form > 
+                  <p:dataTable value="#{faceMB.resultList}" var="person">
+           
+           <f:facet name="header">
+       Eşleşme Listesi
+    </f:facet>
+             	<p:column headerText="Score">
+        <h:outputText value="#{person.confidence}" />
+    </p:column>
+    <p:column headerText="Name">
+        <h:outputText value="#{person.name}" />
+    </p:column>
+    
+            
+            </p:dataTable>    
+                  
                      <p:dataTable value="#{faceMB.personList}" var="person">
            
            <f:facet name="header">

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.json.simple.parser.ParseException;
@@ -19,9 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component(value="faceMB")
-@ApplicationScoped
-
-
+@ViewScoped
 public class FaceMB {
 	
 	//http://image5.sahibinden.com/photos/09/00/91/2280900916zz.jpg
