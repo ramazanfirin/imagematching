@@ -12,6 +12,7 @@
 		<class>org.slevin.common.LtuImage</class>
 		<class>org.slevin.common.EmotionImage</class>
 		<class>org.slevin.common.AyonixPerson</class>
+		<class>org.slevin.common.FaceMatcherPerson</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 	</persistence-unit>

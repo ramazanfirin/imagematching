@@ -2,14 +2,15 @@ package org.slevin.util;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
@@ -21,7 +22,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slevin.util.tagging.model.PairKey;
 
 public class AyonixUtil {
@@ -317,6 +317,8 @@ public class AyonixUtil {
 
 	        try
 	        {
+	        	
+	        	System.out.println(new Date()+ " compare methodu cağrildi");
 	            URIBuilder builder = new URIBuilder("http://webapi.ayonix.com:8090/ayonixwebapi");
 	            									// https://api.projectoxford.ai/vision/v1.0/analyze?visualFeatures=Categories
 
@@ -325,6 +327,14 @@ public class AyonixUtil {
 
 	            URI uri = builder.build();
 	            HttpPost request = new HttpPost(uri);
+	            
+	            RequestConfig config = RequestConfig.custom()
+	            	    .setSocketTimeout(10 * 1000)
+	            	    .setConnectTimeout(10 * 1000)
+	            	    .build();
+	           
+	            HttpClients.custom()
+	            .setDefaultRequestConfig(config);
 	            
 //	            request.setHeader("Content-Type", "application/octet-stream");
 //	            request.setHeader("Ocp-Apim-Subscription-Key", keyTagging);
@@ -383,7 +393,7 @@ public class AyonixUtil {
                  String result = (String)obj.get("result");	
                  if(result.equals("OK")){
                 	 String  array = (String)obj.get("score");
-                 	
+                	 System.out.println(new Date()+ " compare methodu sonlandi");
                  	return array;
                  }else
                  	throw new Exception();	            }
